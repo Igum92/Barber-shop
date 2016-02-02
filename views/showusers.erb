@@ -2,20 +2,13 @@
 <p>Тут Вы можете увидеть список записавшихся</p>
 
 <table class="table">
-<tr>
-<td>aa</td>
-<td>bb</td>
-</tr>
-<tr>
-<td>cc</td>
-<td>dd</td>
-</tr>
-<tr>
-<td>ee</td>
-<td>ff</td>
-</tr>
-<tr>
-<td>tt</td>
-<td>rr</td>
-</tr>
+	<% @results.each do |row| %>
+		<tr>
+			<td><% row['Name'] %></td>
+			<td><% row['Phone'] %></td>
+			<td><% row['DateStamp'] %></td>
+			<td><% row['Barber'] %></td>
+			<td><% row['Color'] %></td>
+		</tr>
+	<% end %>
 </table>
