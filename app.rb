@@ -3,6 +3,18 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 
+def is_barber_exist? db, name
+	db.execute('select * from Barbers where Name=?', [name]).length > 0
+end
+	
+def seed_db db, barbers
+	barbers.each do |barber|
+		if !is_barber_exist? db, barber
+			db.execute 'insert into Barbers (Name) values(?)',[barber]
+		end
+	end
+end
+
 def get_db
 	db = SQLite3::Database.new 'barbershop.db'
 	db.results_as_hash=true
@@ -20,6 +32,14 @@ configure do
 			"Color" TEXT
 		)'
 
+	db.execute 'CREATE TABLE IF NOT EXISTS
+		"Barbers" 
+		(
+			"Id" INTEGER PRIMARY KEY AUTOINCREMENT,
+			"Name" TEXT
+		)'
+	seed_db db, ['Jessie Pinkman', 'Walter White', 'Gus Fringman', 'Whill Smith']
+	
 end
 
 get '/' do

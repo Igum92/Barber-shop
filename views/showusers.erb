@@ -18,7 +18,7 @@
 			<td>Парикмахер</td>
 			<td>Цвет</td>
 		</tr>
-	<body>
+	<tbody>
 		<% @results.each do |row| %>
 			<tr>
 				<td><%= row['Name'] %></td>
@@ -28,5 +28,5 @@
 				<td><%= row['Color'] %></td>
 			</tr>
 		<% end %>
-	</body>
+	</tbody>
 </table>
