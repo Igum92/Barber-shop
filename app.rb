@@ -23,7 +23,7 @@ end
 
 before do
 	db=get_db
-	@results = db.execute 'select * from Barbers order by id desc'
+	@barbers = db.execute 'select * from Barbers order by id desc'
 end
 
 configure do
@@ -96,7 +96,7 @@ post '/visit' do
 	values(?, ?, ?, ?, ?)', [@username, @phone, @datetime, @barber, @color]
 
 
-	erb "OK, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
+	erb "<h3> Спасибо! Вы записались! </h3>"
 
 end
 
@@ -129,5 +129,7 @@ post '/contacts' do
 end
 
 get '/showusers'do
+	db=get_db
+	@results = db.execute 'select * from Users order by id desc'
 	erb :showusers                                     
 end
